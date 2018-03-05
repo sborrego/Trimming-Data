@@ -49,6 +49,8 @@ for SAMPLE in `find ${DATA_DIR_SE} -name \*.fastq\*`; do
 
 	fastqc ${OUTPUT} \
     --outdir ${TRIM_DATA_SE_QC}
+
+    mv ${TRIM_DATA_SE_QC}/*.html ${SE_QC_HTML}
 done
 
 # Here we are compressing the HTML result file using the program tar
