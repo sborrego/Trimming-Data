@@ -30,7 +30,7 @@ RUNLOG=${TRIM_DATA_SE}/runlog.txt
 echo "Run by `whoami` on `date`" > ${RUNLOG}
 
 for SAMPLE in `find ${DATA_DIR_SE} -name \*.fastq\*`; do
-	OUTPUT=${TRIM_DATA_SE}/${SAMPLE}.fq.gz
+	OUTPUT=${TRIM_DATA_SE}/trimmed_`basename ${SAMPLE}`
 
 	TRIMMER="HEADCROP:13 LEADING:3 TRAILING:1 SLIDINGWINDOW:4:15 MINLEN:36"
 
@@ -43,7 +43,6 @@ for SAMPLE in `find ${DATA_DIR_SE} -name \*.fastq\*`; do
 	-baseout ${OUTPUT} \
 	${TRIMMER} \
 	2>> ${RUNLOG}
-    
 done
 
 
