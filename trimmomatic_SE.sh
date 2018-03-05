@@ -10,6 +10,8 @@
 
 module load blcr
 
+set -euxo pipefail
+
 # Here we are assigning variables with paths
 DIR=/data/users/$USER/BioinformaticsSG/Trimming-Data
 SE_DIR=${DIR}/single_end_data
@@ -27,7 +29,7 @@ mkdir -p ${TRIM_DATA_SE_QC}
 RUNLOG=${TRIM_DATA_SE}/runlog.txt
 echo "Run by `whoami` on `date`" > ${RUNLOG}
 
-for SAMPLE in `find ${DATA_SE} -name \*.fastq`; do
+for SAMPLE in `find ${DATA_DIR_SE} -name \*.fastq\*`; do
 	OUTPUT=${TRIM_DATA_SE}/${SAMPLE}.fq.gz
 
 	TRIMMER="HEADCROP:13 LEADING:3 TRAILING:1 SLIDINGWINDOW:4:15 MINLEN:36"
