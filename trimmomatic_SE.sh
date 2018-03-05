@@ -40,7 +40,7 @@ for SAMPLE in `find ${DATA_DIR_SE} -name \*.fastq\*`; do
 	java -jar ${TRIMMOMATIC_DIR} SE \
 	-threads 8 \
 	${SAMPLE} \
-	-baseout ${OUTPUT} \
+	${OUTPUT} \
 	${TRIMMER} \
 	2>> ${RUNLOG}
 done
