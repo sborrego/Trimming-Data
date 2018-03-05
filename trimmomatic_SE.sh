@@ -25,8 +25,9 @@ SE_QC_HTML=${TRIM_DATA_SE_QC}/SE_trim_data_QC_html
 TRIMMOMATIC_DIR=/data/apps/trimmomatic/0.35/trimmomatic-0.35.jar 
 
 # Here we are making two new directories, DATA_SRA is for our sra data and DATA_FQ is for the fastq file
-mkdir -p  ${TRIM_DATA_SE}
+mkdir -p ${TRIM_DATA_SE}
 mkdir -p ${TRIM_DATA_SE_QC}
+mkdir -p ${SE_QC_HTML}
 
 RUNLOG=${TRIM_DATA_SE}/runlog.txt
 echo "Run by `whoami` on `date`" > ${RUNLOG}
@@ -48,8 +49,6 @@ for SAMPLE in `find ${DATA_DIR_SE} -name \*.fastq\*`; do
 
 	fastqc ${OUTPUT} \
     --outdir ${TRIM_DATA_SE_QC}
-    
-    mv ${TRIM_DATA_SE_QC}/*.html ${SE_QC_HTML}
 done
 
 # Here we are compressing the HTML result file using the program tar
