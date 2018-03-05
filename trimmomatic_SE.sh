@@ -24,8 +24,8 @@ TRIMMOMATIC_DIR=/data/apps/trimmomatic/0.35/trimmomatic-0.35.jar
 mkdir ${TRIM_DATA_SE}
 mkdir ${TRIM_DATA_SE_QC}
 
-RUNLOG=${TRIM_DATA_DIR}/runlog.txt
-echo "Run by `whoami` on `date`" > $RUNLOG
+RUNLOG=${TRIM_DATA_SE}/runlog.txt
+echo "Run by `whoami` on `date`" > ${RUNLOG}
 
 for SAMPLE in `find ${DATA_SE} -name \*.fastq`; do
 	INPUT=${TRIM_DATA_SE}/${SAMPLE}.fq.gz
