@@ -4,11 +4,13 @@
 
 #$ -pe openmp 8-64
 
+module load blcr
+
 set -euxo pipefail
 
 TRIMMOMATIC_DIR=/data/apps/trimmomatic/0.35/trimmomatic-0.35.jar 
-TRIM_DATA_DIR=/data/users/sborrego/BioinformaticsSG/griffith_data_trimmed
-DATA_DIR=/data/users/sborrego/BioinformaticsSG/griffith_data/reads
+TRIM_DATA_DIR=/data/users/$USER/BioinformaticsSG/griffith_data_trimmed
+DATA_DIR=/data/users/$USER/BioinformaticsSG/griffith_data/reads
 
 mkdir -p ${TRIM_DATA_DIR}
 

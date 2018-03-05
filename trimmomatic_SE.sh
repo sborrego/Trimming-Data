@@ -12,10 +12,11 @@ module load blcr
 
 # Here we are assigning variables with paths
 DIR=/data/users/$USER/BioinformaticsSG/Trimming-Data
-DATA_DIR_SE=${DIR}/SE_data
+SE_DIR=${DIR}/single_end_data
+DATA_DIR_SE=${SE_DIR}/SE_fq_data
 
-TRIM_DATA_SE=${DATA_DIR_SE}/SE_trim_data
-TRIM_DATA_SE_QC=${DATA_DIR_SE}/SE_trim_data_QC
+TRIM_DATA_SE=${SE_DIR}/SE_trim_data
+TRIM_DATA_SE_QC=${SE_DIR}/SE_trim_data_QC
 
 TRIMMOMATIC_DIR=/data/apps/trimmomatic/0.35/trimmomatic-0.35.jar 
 

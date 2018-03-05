@@ -13,15 +13,18 @@ module load SRAToolKit
 
 # Here we are assigning variables with paths
 DIR=/data/users/$USER/BioinformaticsSG/Trimming-Data
-DATA_SE_SRA=${DIR}/SE_data
-DATA_SE=${DIR}/SE_fastq
+SE_DIR=${DIR}/single_end_data
+
+DATA_SRA_SE=${SE_DIR}/SE_sra_data
+DATA_DIR_SE=${SE_DIR}/SE_fq_data
 
 # Here we are making two new directories, DATA_SRA is for our sra data and DATA_FQ is for the fastq file
-mkdir ${DATA_SRA}
-mkdir ${DATA_FQ}
+mkdir ${SE_DIR}
+mkdir ${DATA_SRA_SE}
+mkdir ${DATA_DIR_SE}
 
 # Here we are changing our current directory to the DATA directory
-cd ${DATA_SRA}
+cd ${DATA_SRA_SE}
 
 # Here you have to manually write out the PREFIX (first three characters of experiment names), BASE (first six characters), 
 # and the range of numbers after the BASE
@@ -35,5 +38,5 @@ for ID in `seq ${nstart_seq} ${nstop_seq}`; do
         SRA_FILE=${BASE}${ID}
         echo $USER is downloading ${SRA_FILE}
         wget ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByRun/sra/${PREFIX}/${BASE}/${SRA_FILE}/${SRA_FILE}.sra
-        fastq-dump --outdir ${DATA_FQ} -X 1000 ${DATA_SRA}/${SRA_FILE}.sra
+        fastq-dump --outdir ${DATA_DIR_SE} -X 1000 ${DATA_SRA_SE}/${SRA_FILE}.sra
 done
