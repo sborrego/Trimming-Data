@@ -38,5 +38,5 @@ for ID in `seq ${nstart_seq} ${nstop_seq}`; do
         SRA_FILE=${BASE}${ID}
         echo $USER is downloading ${SRA_FILE}
         wget ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByRun/sra/${PREFIX}/${BASE}/${SRA_FILE}/${SRA_FILE}.sra
-        fastq-dump --outdir ${DATA_DIR_SE} -X 1000 ${DATA_SRA_SE}/${SRA_FILE}.sra
+        fastq-dump --outdir ${DATA_DIR_SE} --gzip -X 1000 ${DATA_SRA_SE}/${SRA_FILE}.sra
 done

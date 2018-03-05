@@ -21,14 +21,13 @@ TRIM_DATA_SE_QC=${SE_DIR}/SE_trim_data_QC
 TRIMMOMATIC_DIR=/data/apps/trimmomatic/0.35/trimmomatic-0.35.jar 
 
 # Here we are making two new directories, DATA_SRA is for our sra data and DATA_FQ is for the fastq file
-mkdir ${TRIM_DATA_SE}
-mkdir ${TRIM_DATA_SE_QC}
+mkdir -p  ${TRIM_DATA_SE}
+mkdir -p ${TRIM_DATA_SE_QC}
 
 RUNLOG=${TRIM_DATA_SE}/runlog.txt
 echo "Run by `whoami` on `date`" > ${RUNLOG}
 
 for SAMPLE in `find ${DATA_SE} -name \*.fastq`; do
-	INPUT=${TRIM_DATA_SE}/${SAMPLE}.fq.gz
 	OUTPUT=${TRIM_DATA_SE}/${SAMPLE}.fq.gz
 
 	TRIMMER="HEADCROP:13 LEADING:3 TRAILING:1 SLIDINGWINDOW:4:15 MINLEN:36"
@@ -38,7 +37,7 @@ for SAMPLE in `find ${DATA_SE} -name \*.fastq`; do
 
 	java -jar ${TRIMMOMATIC_DIR} SE \
 	-threads 8 \
-	${INPUT} \
+	${SAMPLE} \
 	-baseout ${OUTPUT} \
 	${TRIMMER} \
 	2>> ${RUNLOG}
