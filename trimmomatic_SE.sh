@@ -9,6 +9,7 @@
 #$ -ckpt blcr               # (c)heckpoint: writes a snapshot of a process to disk, (r)estarts the process after the checkpoint is c$
 
 module load blcr
+module load fastqc/0.11.7
 
 set -euxo pipefail
 
@@ -19,6 +20,7 @@ DATA_DIR_SE=${SE_DIR}/SE_fq_data
 
 TRIM_DATA_SE=${SE_DIR}/SE_trim_data
 TRIM_DATA_SE_QC=${SE_DIR}/SE_trim_data_QC
+SE_QC_HTML=${TRIM_DATA_SE_QC}/SE_trim_data_QC_html
 
 TRIMMOMATIC_DIR=/data/apps/trimmomatic/0.35/trimmomatic-0.35.jar 
 
@@ -43,7 +45,17 @@ for SAMPLE in `find ${DATA_DIR_SE} -name \*.fastq\*`; do
 	${OUTPUT} \
 	${TRIMMER} \
 	2>> ${RUNLOG}
+
+	fastqc ${OUTPUT} \
+    --outdir ${TRIM_DATA_SE_QC}
+    
+    mv ${TRIM_DATA_SE_QC}/*.html ${SE_QC_HTML}
 done
+
+# Here we are compressing the HTML result file using the program tar
+# -C flag prevents the parent directories from being included in the archive
+# -csvf (c)reates archive, uses g(z)ip for compression, (v)erbosely shows the .tar file progress, (f)ilename appears next in the command
+#tar -C ${SE_QC_HTML} -czvf ${HTML}.tar.gz ${HTML}
 
 
 # Some notes on the trimmer setting:
