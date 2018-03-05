@@ -56,7 +56,7 @@ done
 # Here we are compressing the HTML result file using the program tar
 # -C flag prevents the parent directories from being included in the archive
 # -csvf (c)reates archive, uses g(z)ip for compression, (v)erbosely shows the .tar file progress, (f)ilename appears next in the command
-#tar -C ${SE_QC_HTML} -czvf ${HTML}.tar.gz ${HTML}
+tar -C ${TRIM_DATA_SE_QC} -czvf ${SE_QC_HTML}.tar.gz ${SE_QC_HTML}
 
 
 # Some notes on the trimmer setting:
