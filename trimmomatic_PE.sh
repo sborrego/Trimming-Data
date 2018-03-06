@@ -30,7 +30,7 @@ mkdir -p ${TRIM_DATA_PE}
 
 # TRIMMOMATIC for paired end samples
 
-RUNLOG=${TRIM_DATA_DIR}/runlog.txt
+RUNLOG=${TRIM_DATA_PE}/runlog.txt
 echo "Run by `whoami` on `date`" > $RUNLOG
 
 for SAMPLE in HBR UHR;
