@@ -63,7 +63,7 @@ do
      done
 done
 
-for SAMPLE in `find ${TRIM_DATA_PE} -n \*P.\*`; do
+for SAMPLE in `find ${TRIM_DATA_PE} -name \*P.\*`; do
     fastqc ${SAMPLE} \
     --outdir ${TRIM_DATA_PE_QC}
 
