@@ -40,7 +40,7 @@ do
         # Build the name of the files.
         R1=${DATA_DIR}/${SAMPLE}_${REPLICATE}_R1.fq.gz
         R2=${DATA_DIR}/${SAMPLE}_${REPLICATE}_R2.fq.gz
-        TRIM_FILE=${TRIM_DATA_DIR}/${SAMPLE}_${REPLICATE}.fq.gz
+        OUTPUT=${TRIM_DATA_PE}/${SAMPLE}_${REPLICATE}.fq.gz
 
         TRIMMER="HEADCROP:13 LEADING:3 TRAILING:1 SLIDINGWINDOW:4:15 MINLEN:36"
 
@@ -50,7 +50,7 @@ do
         java -jar ${TRIMMOMATIC_DIR} PE \
         -threads 8 \
         ${R1} ${R2} \
-        -baseout ${TRIM_FILE} \
+        -baseout ${OUTPUT} \
         ${TRIMMER} \
         2>> $RUNLOG
      done
