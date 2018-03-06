@@ -40,7 +40,8 @@ for SAMPLE in `find ${DATA_DIR_SE} -name \*.fastq\*`; do
 	echo "*** Trimming: ${SAMPLE}"
 	echo "`basename ${SAMPLE}` Summary" >> $RUNLOG
 
-	java -jar ${TRIMMOMATIC_DIR} SE \
+	java -jar ${TRIMMOMATIC_DIR} \
+	SE \
 	-threads 8 \
 	${SAMPLE} \
 	${OUTPUT} \
@@ -48,9 +49,9 @@ for SAMPLE in `find ${DATA_DIR_SE} -name \*.fastq\*`; do
 	2>> ${RUNLOG}
 
 	fastqc ${OUTPUT} \
-    --outdir ${TRIM_DATA_SE_QC}
+	--outdir ${TRIM_DATA_SE_QC}
 
-    mv ${TRIM_DATA_SE_QC}/*.html ${SE_QC_HTML}
+	mv ${TRIM_DATA_SE_QC}/*.html ${SE_QC_HTML}
 done
 
 # Here we are compressing the HTML result file using the program tar

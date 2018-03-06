@@ -17,14 +17,12 @@ DATA_DIR=/data/users/sborrego/BioinformaticsSG/griffith_data/reads
 DIR=/data/users/$USER/BioinformaticsSG/Trimming-Data
 
 PE_DIR=${DIR}/paired_end_data
-DATA_DIR_PE=${PE_DIR}/PE_fq_data
 
 TRIM_DATA_PE=${PE_DIR}/PE_trim_data
 
 TRIMMOMATIC_DIR=/data/apps/trimmomatic/0.35/trimmomatic-0.35.jar 
 
 mkdir -p ${PE_DIR}
-mkdir -p ${DATA_DIR_PE}
 
 mkdir -p ${TRIM_DATA_PE}
 
@@ -47,7 +45,8 @@ do
         echo "*** Trimming: ${SAMPLE}_${REPLICATE}"
         echo "${SAMPLE}_${REPLICATE} Summary" >> $RUNLOG
 
-        java -jar ${TRIMMOMATIC_DIR} PE \
+        java -jar ${TRIMMOMATIC_DIR} \
+        PE \
         -threads 8 \
         ${R1} ${R2} \
         -baseout ${OUTPUT} \
