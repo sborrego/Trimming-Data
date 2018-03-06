@@ -1,14 +1,15 @@
 #!/bin/bash
 
-#$ -N trim_PE          # name of the job
-#$ -o /data/users/$USER/BioinformaticsSG/Trimming-Data/trim_PE.out   # contains what would normally be printed to stdout (the$
-#$ -e /data/users/$USER/BioinformaticsSG/Trimming-Data/trim_PE.err   # file name to print standard error messages to. These m$
+#$ -N trim_qc_PE          # name of the job
+#$ -o /data/users/$USER/BioinformaticsSG/Trimming-Data/trim_qc_PE.out   # contains what would normally be printed to stdout (the$
+#$ -e /data/users/$USER/BioinformaticsSG/Trimming-Data/trim_qc_PE.err   # file name to print standard error messages to. These m$
 #$ -q free64,som,asom       # request cores from the free64, som, asom queues.
 #$ -pe openmp 8-64          # request parallel environment. You can include a minimum and maximum core count.
 #$ -m beas                  # send you email of job status (b)egin, (e)rror, (a)bort, (s)uspend
 #$ -ckpt blcr               # (c)heckpoint: writes a snapshot of a process to disk, (r)estarts the process after the checkpoint is c$
 
 module load blcr
+module load fastqc/0.11.7
 
 set -euxo pipefail
 
@@ -17,9 +18,11 @@ DATA_DIR=/data/users/sborrego/BioinformaticsSG/griffith_data/reads
 DIR=/data/users/$USER/BioinformaticsSG/Trimming-Data
 
 PE_DIR=${DIR}/paired_end_data
-DATA_DIR_PE=${PE_DIR}/PE_fq_data
+DATA_DIR_PE=${SE_DIR}/PE_fq_data
 
 TRIM_DATA_PE=${PE_DIR}/PE_trim_data
+TRIM_DATA_PE_QC=${PE_DIR}/PE_trim_data_QC
+PE_QC_HTML=${TRIM_DATA_PE_QC}/PE_trim_data_QC_html
 
 TRIMMOMATIC_DIR=/data/apps/trimmomatic/0.35/trimmomatic-0.35.jar 
 
@@ -27,6 +30,8 @@ mkdir -p ${PE_DIR}
 mkdir -p ${DATA_DIR_PE}
 
 mkdir -p ${TRIM_DATA_PE}
+mkdir -p ${TRIM_DATA_PE_QC}
+mkdir -p ${PE_QC_HTML}
 
 # TRIMMOMATIC for paired end samples
 
