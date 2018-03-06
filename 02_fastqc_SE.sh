@@ -25,7 +25,7 @@ mkdir -p ${SE_QC_HTML}
 
 for SAMPLE in `find ${DATA_DIR_SE} -type f`; do
 	fastqc ${SAMPLE} \
-	--outdir ${DATA_SE_QC}
+	--outdir ${SE_DATA_QC}
 
 	mv ${SE_DATA_QC}/*.html ${SE_QC_HTML}
 done
