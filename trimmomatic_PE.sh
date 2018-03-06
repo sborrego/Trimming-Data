@@ -44,8 +44,8 @@ do
 
         TRIMMER="HEADCROP:13 LEADING:3 TRAILING:1 SLIDINGWINDOW:4:15 MINLEN:36"
 
-        echo "*** Trimming: $TRIM_FILE"
-        echo "`basename $TRIM_FILE` Summary" >> $RUNLOG
+        echo "*** Trimming: ${SAMPLE}_${REPLICATE}"
+        echo "${SAMPLE}_${REPLICATE} Summary" >> $RUNLOG
 
         java -jar ${TRIMMOMATIC_DIR} PE \
         -threads 8 \
